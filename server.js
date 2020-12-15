@@ -15,6 +15,7 @@ colors.enable();
 
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
+const { response } = require("express");
 
 // LOAD ENV
 dotnev.config({ path: "./config/config.env" });
@@ -45,8 +46,8 @@ app.post("/emit/:data", async (req, res) => {
 	try {
 
 		res.status(200).send({
-			success	: true,
-			message	: 'Data received'
+			success: true,
+			message: 'Data received'
 		});
 
 	} catch (err) {
@@ -55,7 +56,7 @@ app.post("/emit/:data", async (req, res) => {
 });
 
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, { cors: { origins: '*' } });
 
 // SOCKET IO INITIATE
 io.on('connection', (socket) => {
@@ -63,11 +64,14 @@ io.on('connection', (socket) => {
 
 	socket.on('espdata', (msg, response) => {
 		console.log(msg);
-		response({
-			success: true
-		});
-
 		socket.emit('esprender', msg);
+	});
+
+	socket.on('test', (msg, res) => {
+		console.log(msg);
+		// res({
+		// 	success: true
+		// });
 	})
 });
 
@@ -75,7 +79,7 @@ const PORT = process.env.PORT || 5001;
 server.listen(
 	PORT,
 	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+		`Server running in ${process.env.NODE_ENV ? process.env.NODE_ENV : "Dev"} mode on port ${PORT}`.yellow.bold
 	)
 );
 
