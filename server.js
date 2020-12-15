@@ -45,8 +45,8 @@ app.post("/emit/:data", async (req, res) => {
 	try {
 
 		res.status(200).send({
-			success: true,
-			message: 'Data received'
+			success	: true,
+			message	: 'Data received'
 		});
 
 	} catch (err) {
@@ -56,19 +56,20 @@ app.post("/emit/:data", async (req, res) => {
 
 const server = http.createServer(app);
 const io = socketIo(server);
+
 // SOCKET IO INITIATE
 io.on('connection', (socket) => {
 	console.log("New client connected");
 
-	socket.on('stmdata', (msg, response) => {
+	socket.on('espdata', (msg, response) => {
 		console.log(msg);
 		response({
 			success: true
 		});
+
+		socket.emit('esprender', msg);
 	})
 });
-
-
 
 const PORT = process.env.PORT || 5001;
 server.listen(

@@ -1,7 +1,6 @@
-# API for To Do Serial Communication using Serialport.io
+# API To Communicate on Devices using Socket IO
 
-This project will help you to do serial communication with embedded systems such as
-Raspberry PI, Arduino, or STM32. Follow instruction below to try this on your own.
+This project will help you to do communication to clients with embedded systems such as Raspberry PI, Arduino, or STM32. Follow instruction below to try this on your own.
 
 ## Getting Started
 
@@ -14,7 +13,7 @@ project on a live system.
 If you interested to clone this project, you may use this command.
 
 ```
-git clone https://github.com/satrioadii/se2_read_serial.git
+git clone https://github.com/satrioadii/wtk_socket_server.git
 ```
 
 ### Installing
@@ -51,12 +50,12 @@ npm run dev
 ```
 
 The development server is started on port 7001. If the PORT variable is not
-exist, the port 5000 will be selected by default.
+exist, the port 5001 will be selected by default.
 
 ## Built With
 
 - [Express JS](https://expressjs.com/) - The web framework used
-- [SerialPort](https://serialport.io/) - Serial Communication Package
+- [Socket IO](https://socket.io/docs/v3/index.html) - The comunication tools
 
 ## Authors
 
